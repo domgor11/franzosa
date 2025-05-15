@@ -8,7 +8,7 @@ def count_patients_with_sparse_clusters(file_path):
     cluster_cols = [col for col in df.columns if 'Cluster' in col]  
       
     # For each row (patient), count number of zero entries in cluster columns  
-    # and check if they are 50% or more of the total cluster columns  
+    # and check if they are 10% or more of the total cluster columns  
     sparse_count = (df[cluster_cols].apply(lambda row: (row == 0).sum(), axis=1)  
                       >= (0.1 * len(cluster_cols))).sum()  
       
@@ -16,7 +16,7 @@ def count_patients_with_sparse_clusters(file_path):
   
 # Testing the function on the filtered file  
 result = count_patients_with_sparse_clusters('data_cleaning/CD_metadata_mtb_merged.xlsx')  
-print("Number of patients with 50% or more zeros in cluster columns:", result)  
+print("Number of patients with 10% or more zeros in cluster columns:", result)  
 
   
 def count_sparse_cluster_columns(file_path):  
